@@ -1,0 +1,26 @@
+{
+  "name": "autoid-db",
+  "version": "1.0.0",
+  "description": "A Simple IoT platform for Automatic Indoor Garden",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VRAraya/AutoId-Project.git"
+  },
+  "author": "VRAraya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VRAraya/AutoId-Project/issues"
+  },
+  "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
+  "devDependencies": {
+    "standard": "^13.1.0"
+  },
+  "dependencies": {
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.12.2"
+  }
+}
