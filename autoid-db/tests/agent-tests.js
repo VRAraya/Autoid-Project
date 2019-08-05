@@ -2,6 +2,16 @@
 
 const test = require('ava')
 
-test('make it pass', t => {
-  t.pass()
+const config = {
+  logging: function () {}
+}
+let db = null
+
+test.beforeEach(async () => {
+  const setupDatabase = require('../')
+  db = await setupDatabase(config)
+})
+
+test('Agent', t => {
+  t.truthy(db.Agent, 'Agent service should exist')
 })
