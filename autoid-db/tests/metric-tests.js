@@ -5,17 +5,17 @@ const proxyquire = require('proxyquire')
 const agentFixtures = require('./fixtures/agent')
 const metricFixtures = require('./fixtures/metric')
 
-let config = {
-  logging() {}
-};
+const config = {
+  logging () {}
+}
 
 let MetricStub = null
 let AgentStub = null
-let uuid = 'yyy-yyy-yyy'
-let type = 'memory'
+const uuid = 'yyy-yyy-yyy'
+const type = 'memory'
 let db, sandbox
 
-let uuidArgs = {
+const uuidArgs = {
   attributes: ['type'],
   group: ['type'],
   include: [
@@ -30,7 +30,7 @@ let uuidArgs = {
   raw: true
 }
 
-let typeArgs = {
+const typeArgs = {
   attributes: ['id', 'type', 'value', 'createdAt'],
   where: {
     type
@@ -49,15 +49,15 @@ let typeArgs = {
   raw: true
 }
 
-let newMetric = {
+const newMetric = {
   id: 10,
   type: 'memory',
   value: '300'
-};
+}
 
-let agentUuidArgs = {
+const agentUuidArgs = {
   where: { uuid }
-};
+}
 
 test.beforeEach(async () => {
   sandbox = sinon.createSandbox()
@@ -79,7 +79,7 @@ test.beforeEach(async () => {
   MetricStub.create = sandbox.stub()
   MetricStub.create.withArgs(newMetric).returns(
     Promise.resolve({
-      toJSON() {
+      toJSON () {
         return newMetric
       }
     })
@@ -131,34 +131,34 @@ test.serial('Setup Metric', t => {
 })
 
 test.serial('Metric#findByAgentUuid', async t => {
-  let metric = await db.Metric.findByAgentUuid(uuid)
+  const metric = await db.Metric.findByAgentUuid(uuid)
 
   t.true(MetricStub.findAll.called, 'findAll should be called on model')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called once')
-  t.true(MetricStub.findAll.calledWith(uuidArgs),'findAll should be called without args')
+  t.true(MetricStub.findAll.calledWith(uuidArgs), 'findAll should be called without args')
   t.deepEqual(metric, metricFixtures.byAgentUuid(uuid), 'Should be the same')
 })
 
 test.serial('Metric#findByTypeAgentUuid', async t => {
-  let metric = await db.Metric.findByTypeAgentUuid(type, uuid)
+  const metric = await db.Metric.findByTypeAgentUuid(type, uuid)
 
   t.true(MetricStub.findAll.called, 'findAll should be called on model')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called once')
-  t.true(MetricStub.findAll.calledWith(typeArgs),'findAll should be called without args')
-  
-  t.deepEqual(metric,metricFixtures.byTypeAgentUuid(type, uuid),'Should be the same')
+  t.true(MetricStub.findAll.calledWith(typeArgs), 'findAll should be called without args')
+
+  t.deepEqual(metric, metricFixtures.byTypeAgentUuid(type, uuid), 'Should be the same')
 })
 
 test.serial('Metric#Create', async t => {
-  let metric = await db.Metric.create(uuid, newMetric)
+  const metric = await db.Metric.create(uuid, newMetric)
 
   t.true(AgentStub.findOne.called, 'Agent findOne should be called on model')
   t.true(AgentStub.findOne.calledOnce, 'Agent findOne should be called once')
-  t.true(AgentStub.findOne.calledWith(agentUuidArgs),'findOne should be called with uuid args')
+  t.true(AgentStub.findOne.calledWith(agentUuidArgs), 'findOne should be called with uuid args')
 
   t.true(MetricStub.create.called, 'create should be called on model')
   t.true(MetricStub.create.calledOnce, 'create should be called once')
-  t.true(MetricStub.create.calledWith(newMetric),'create should be called once')
+  t.true(MetricStub.create.calledWith(newMetric), 'create should be called once')
 
   t.deepEqual(metric, newMetric, 'agent should be the same')
 })

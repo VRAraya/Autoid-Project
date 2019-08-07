@@ -31,22 +31,22 @@ const metrics = [
   })
 ]
 
-function getAgentId(uuid) {
-  let agent = agentFixtures.byUuid(uuid)
+function getAgentId (uuid) {
+  const agent = agentFixtures.byUuid(uuid)
   return agent === undefined ? false : agent.id
 }
 
-function byAgentUuid(uuid) {
-  let id = getAgentId(uuid)
+function byAgentUuid (uuid) {
+  const id = getAgentId(uuid)
   if (id) {
-    let s = new Set(metrics.filter(m => m.agentId === id).map(m => m.type))
+    const s = new Set(metrics.filter(m => m.agentId === id).map(m => m.type))
     return [...s]
   }
   return []
 }
 
-function byTypeAgentUuid(type, uuid) {
-  let id = getAgentId(uuid)
+function byTypeAgentUuid (type, uuid) {
+  const id = getAgentId(uuid)
   if (id) {
     return metrics
       .filter(m => m.agentId === id)

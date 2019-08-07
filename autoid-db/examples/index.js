@@ -2,7 +2,7 @@
 
 const db = require('../')
 
-async function run() {
+async function run () {
   const config = {
     database: process.env.DB_NAME || 'autoidgarden',
     username: process.env.DB_USER || 'root',
