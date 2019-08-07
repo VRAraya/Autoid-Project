@@ -59,7 +59,9 @@ test.beforeEach(async () => {
 
   // Model create Stub
   AgentStub.create = sandbox.stub()
-  AgentStub.create.withArgs(newAgent).returns(Promise.resolve({
+  AgentStub.create
+  .withArgs(newAgent).
+  returns(Promise.resolve({
     toJSON () {
       return newAgent
     }
