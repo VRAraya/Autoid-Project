@@ -4,21 +4,24 @@ const debug = require('debug')('autoid:db:setup')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const db = require('./')
+const argv = require('yargs').boolean('y').argv
 
 const prompt = inquirer.createPromptModule()
 
 async function setup () {
-  const answer = await prompt([
-    {
+
+  const ops = argv.y
+
+  if (!ops) {
+    const answer = await prompt({
       type: 'confirm',
       name: 'setup',
-      message: 'This will destroy your database, are you sure?'
+      massage: 'This will destroy your DataBase, Are you Sure?'
+    })
+    if (!answer.setup || ops) {
+      return console.log('Nothing happened :)')
     }
-  ])
-
-  if (!answer.setup) {
-    return console.log('Nothing happened :)')
-  }
+  }  
 
   const config = {
     database: process.env.DB_NAME || 'autoidgarden',
@@ -30,6 +33,7 @@ async function setup () {
     setup: true
 
   }
+
   await db(config).catch(handleFatalError)
 
   console.log('Success!')
