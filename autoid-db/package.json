@@ -1,6 +1,7 @@
 {
   "name": "autoid-db",
   "version": "1.0.0",
+  "private": true,
   "description": "A Simple IoT platform for Automatic Indoor Garden",
   "main": "index.js",
   "scripts": {

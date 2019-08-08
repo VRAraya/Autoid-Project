@@ -31,7 +31,6 @@ async function setup () {
     dialect: 'mysql',
     logging: s => debug(s),
     setup: true
-
   }
 
   await db(config).catch(handleFatalError)
