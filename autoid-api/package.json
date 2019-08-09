@@ -1,0 +1,31 @@
+{
+  "name": "autoid-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Simple IoT Platform for Automatic Indoor Garden - API",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "DEBUG=autoid:* nodemon server.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VRAraya/AutoId-Project.git"
+  },
+  "author": "VRAraya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VRAraya/AutoId-Project/issues"
+  },
+  "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "debug": "^4.1.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "standard": "^13.1.0"
+  }
+}
