@@ -1,10 +1,4 @@
-# Automatic Indoor Garden Agent
-
-## Usage
-
-``` js
-
-const AutoIdAgent = require('autoid-agent')
+const AutoIdAgent = require('../')
 
 const agent = new AutoIdAgent({
   name: 'myapp',
@@ -16,7 +10,7 @@ agent.addMetric('rss', function getRss () {
   return process.memoryUsage().rss
 })
 
-agent.addMetric('promiseMetric', function getRandomPromise() {
+agent.addMetric('promiseMetric', function getRandomPromise () {
   return Promise.resolve(Math.random())
 })
 
@@ -26,7 +20,7 @@ agent.addMetric('callbackMetric', function getRandomCallback (callback) {
   }, 1000)
 })
 
-agent. connect()
+agent.connect()
 
 // This agent only
 agent.on('connected', handler)
@@ -42,6 +36,4 @@ function handler (payload) {
   console.log(payload)
 }
 
-setTimeout(() => agent.disconnect(), 20000)
-
-```
+setTimeout(() => agent.disconnect(), 10000)
