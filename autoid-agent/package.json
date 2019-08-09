@@ -1,0 +1,23 @@
+{
+  "name": "autoid-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Simple IoT Platform for Automatic Indoor Garden - Agent",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VRAraya/AutoId-Project.git"
+  },
+  "author": "VRAraya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VRAraya/AutoId-Project/issues"
+  },
+  "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
+  "devDependencies": {
+    "standard": "^13.1.0"
+  }
+}
