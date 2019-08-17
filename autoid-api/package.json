@@ -5,6 +5,7 @@
   "description": "A Simple IoT Platform for Automatic Indoor Garden - API",
   "main": "server.js",
   "scripts": {
+    "test": "DEBUG=autoid:* ava tests/* --verbose",
     "start": "NODE_ENV=production node server.js",
     "start-dev": "DEBUG=autoid:* nodemon server.js",
     "lint": "standard"
@@ -22,10 +23,13 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "debug": "^4.1.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "autoid-db": "file:../autoid-db"
   },
   "devDependencies": {
+    "ava": "^2.2.0",
     "nodemon": "^1.19.1",
-    "standard": "^13.1.0"
+    "standard": "^13.1.0",
+    "supertest": "^4.0.2"
   }
 }
