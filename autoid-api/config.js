@@ -10,5 +10,8 @@ module.exports = {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'mysql',
     logging: s => debug(s)
+  },
+  auth: {
+    secret: process.env.SECRET || 'manjaro123'
   }
 }
