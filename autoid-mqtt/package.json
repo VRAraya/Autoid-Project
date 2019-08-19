@@ -20,12 +20,13 @@
   },
   "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
   "dependencies": {
+    "autoid-config": "file:../autoid-config",
+    "autoid-db": "file:../autoid-db",
     "chalk": "^2.4.2",
     "debug": "^4.1.1",
     "mosca": "^2.8.3",
-    "autoid-db": "file:../autoid-db",
-    "autoid-config": "file:../autoid-config",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "ws": "^7.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
