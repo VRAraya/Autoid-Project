@@ -5,6 +5,7 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const db = require('./')
 const argv = require('yargs').boolean('y').argv
+const setupConfig = require('autoid-config')
 
 const prompt = inquirer.createPromptModule()
 
@@ -23,18 +24,12 @@ async function setup () {
     }
   }  
 
-  const config = {
-    database: process.env.DB_NAME || 'autoidgarden',
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'manjaro123',
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'mysql',
-    logging: s => debug(s),
-    setup: true
-  }
+  const config = setupConfig({
+    setup: true,
+    logging: s => debug(s)
+  })
 
   await db(config).catch(handleFatalError)
-
   console.log('Success!')
   process.exit(0)
 }

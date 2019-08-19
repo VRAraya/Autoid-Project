@@ -4,6 +4,7 @@ const debug = require('debug')('autoid:mqtt')
 const mosca = require('mosca')
 const redis = require('redis')
 const chalk = require('chalk')
+const serverConfig = require('autoid-config')
 const db = require('autoid-db')
 
 const { parsePayload } = require('./utils')
@@ -18,14 +19,9 @@ const settings = {
   backend
 }
 
-const config = {
-  database: process.env.DB_NAME || 'autoidgarden',
-  username: process.env.DB_USER || 'root',
-  password: process.env.DB_PASS || 'manjaro123',
-  host: process.env.DB_HOST || 'localhost',
-  dialect: 'mysql',
+const config = serverConfig({
   logging: s => debug(s)
-}
+})
 
 const server = new mosca.Server(settings)
 const clients = new Map()

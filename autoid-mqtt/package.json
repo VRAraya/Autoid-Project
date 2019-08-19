@@ -24,6 +24,7 @@
     "debug": "^4.1.1",
     "mosca": "^2.8.3",
     "autoid-db": "file:../autoid-db",
+    "autoid-config": "file:../autoid-config",
     "redis": "^2.8.0"
   },
   "devDependencies": {
