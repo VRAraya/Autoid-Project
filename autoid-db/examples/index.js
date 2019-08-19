@@ -1,20 +1,15 @@
 'use strict'
 
 const db = require('../')
+const exampleConfig = require('autoid-config')
 
 async function run () {
-  const config = {
-    database: process.env.DB_NAME || 'autoidgarden',
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'manjaro123',
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'mysql'
-  }
+  const config = exampleConfig()
 
   const { Agent, Metric } = await db(config).catch(handleFatalError)
 
   const agent = await Agent.createOrUpdate({
-    uuid: 'yyy',
+    uuid: 'yyyz',
     name: 'test',
     username: 'test',
     hostname: 'test',

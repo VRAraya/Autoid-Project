@@ -54,8 +54,6 @@ class AutoIdAgent extends EventEmitter {
 
         this.emit('connected', this._agentId)
 
-        console.log(this._metrics.size)
-
         this._timer = setInterval(async () => {
           // if (this._metrics.size >= 0) {
           // }
