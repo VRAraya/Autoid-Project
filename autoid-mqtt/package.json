@@ -22,6 +22,7 @@
   "dependencies": {
     "autoid-config": "file:../autoid-config",
     "autoid-db": "file:../autoid-db",
+    "autoid-utils": "file:../autoid-utils",
     "chalk": "^2.4.2",
     "debug": "^4.1.1",
     "mosca": "^2.8.3",

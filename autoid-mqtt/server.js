@@ -7,7 +7,7 @@ const chalk = require('chalk')
 const serverConfig = require('autoid-config')
 const db = require('autoid-db')
 
-const { parsePayload } = require('./utils')
+const { parsePayload } = require('autoid-utils')
 
 const backend = {
   type: 'redis',

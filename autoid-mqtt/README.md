@@ -1,4 +1,4 @@
-# platziverse-mqtt
+# autoid-mqtt
 
 ## `agent/connected`
 

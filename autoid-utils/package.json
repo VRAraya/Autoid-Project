@@ -1,8 +1,7 @@
 {
-  "name": "autoid-agent",
+  "name": "autoid-utils",
   "version": "1.0.0",
-  "private": true,
-  "description": "A Simple IoT Platform for Automatic Indoor Garden - Agent",
+  "description": "A Simple IoT platform for Automatic Indoor Garden - Utils",
   "main": "index.js",
   "scripts": {
     "lint": "standard"
@@ -18,13 +17,6 @@
   },
   "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
   "devDependencies": {
-    "standard": "^13.1.0"
-  },
-  "dependencies": {
-    "autoid-utils": "file:../autoid-utils",
-    "debug": "^4.1.1",
-    "defaults": "^1.0.3",
-    "mqtt": "^3.0.0",
-    "uuid": "^3.3.2"
+    "standard": "^14.0.2"
   }
 }
