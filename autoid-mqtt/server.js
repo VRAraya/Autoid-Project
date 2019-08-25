@@ -105,17 +105,18 @@ server.on('published', async (packet, client) => {
         }
 
         // Store Metrics
-        for (const metric of payload.metrics) {
-          let m
+        const saveMetricsPromises = payload.metrics.map(async (metric) => {
+          let createdMetric
 
           try {
-            m = await Metric.create(agent.uuid, metric)
+            createdMetric = await Metric.create(agent.uuid, metric)
           } catch (e) {
             return handleError(e)
           }
-
-          debug(`Metric ${m.id} saved on agent ${agent.uuid}`)
-        }
+          debug(`Metric ${createdMetric.id} saved on agent ${agent.uuid}`)
+        })
+      
+        Promise.all(saveMetricsPromises).catch(handleError)
       }
       break
   }
