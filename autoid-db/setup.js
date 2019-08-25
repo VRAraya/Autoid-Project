@@ -6,6 +6,7 @@ const chalk = require('chalk')
 const db = require('./')
 const argv = require('yargs').boolean('y').argv
 const setupConfig = require('autoid-config')
+const { handleFatalError } = require('autoid-utils')
 
 const prompt = inquirer.createPromptModule()
 
@@ -32,12 +33,6 @@ async function setup () {
   await db(config).catch(handleFatalError)
   console.log('Success!')
   process.exit(0)
-}
-
-function handleFatalError (err) {
-  console.error(`${chalk.red('[fatal error]')} ${err.message}`)
-  console.error(err.stack)
-  process.exit(1)
 }
 
 setup()

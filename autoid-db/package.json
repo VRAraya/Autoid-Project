@@ -35,6 +35,7 @@
     "mysql2": "^1.6.5",
     "sequelize": "^5.12.2",
     "yargs": "^13.3.0",
-    "autoid-config": "file:../autoid-config"
+    "autoid-config": "file:../autoid-config",
+    "autoid-utils": "file:../autoid-utils"
   }
 }

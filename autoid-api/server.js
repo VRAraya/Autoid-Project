@@ -5,6 +5,8 @@ const chalk = require('chalk')
 const express = require('express')
 const debug = require('debug')('autoid:api')
 
+const { handleFatalError } = require('autoid-utils')
+
 const api = require('./api')
 
 const port = process.env.PORT || 3000
@@ -24,12 +26,6 @@ app.use((err, req, res, next) => {
 
   res.status(500).send({ error: err.message })
 })
-
-function handleFatalError (err) {
-  console.error(`${chalk.red(`[fatal error]`)} ${err.message}`)
-  console.error(err.stack)
-  process.exit(1)
-}
 
 if (!module.parent) { // Si no estamos requiriendo el server desde otro lado, entonces se ejecuta esto
   process.on('uncaughtException', handleFatalError)

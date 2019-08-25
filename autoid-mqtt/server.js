@@ -7,7 +7,7 @@ const chalk = require('chalk')
 const serverConfig = require('autoid-config')
 const db = require('autoid-db')
 
-const { parsePayload } = require('autoid-utils')
+const { parsePayload, handleFatalError, handleError } = require('autoid-utils')
 
 const backend = {
   type: 'redis',
@@ -134,17 +134,6 @@ server.on('ready', async () => {
 })
 
 server.on('error', handleFatalError)
-
-function handleFatalError (err) {
-  console.error(`${chalk.red('[fatal error]')} ${err.message}`)
-  console.error(err.stack)
-  process.exit(1)
-}
-
-function handleError (err) {
-  console.error(`${chalk.red('[error]')} ${err.message}`)
-  console.error(err.stack)
-}
 
 process.on('uncaughtException', handleFatalError)
 process.on('unhandledRejection', handleFatalError)
