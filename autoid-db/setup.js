@@ -2,7 +2,6 @@
 
 const debug = require('debug')('autoid:db:setup')
 const inquirer = require('inquirer')
-const chalk = require('chalk')
 const db = require('./')
 const argv = require('yargs').boolean('y').argv
 const setupConfig = require('autoid-config')
@@ -11,7 +10,6 @@ const { handleFatalError } = require('autoid-utils')
 const prompt = inquirer.createPromptModule()
 
 async function setup () {
-
   const ops = argv.y
 
   if (!ops) {
@@ -23,7 +21,7 @@ async function setup () {
     if (!answer.setup || ops) {
       return console.log('Nothing happened :)')
     }
-  }  
+  }
 
   const config = setupConfig({
     setup: true,

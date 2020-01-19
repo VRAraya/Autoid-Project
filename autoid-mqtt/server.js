@@ -115,7 +115,7 @@ server.on('published', async (packet, client) => {
           }
           debug(`Metric ${createdMetric.id} saved on agent ${agent.uuid}`)
         })
-      
+
         Promise.all(saveMetricsPromises).catch(handleError)
       }
       break

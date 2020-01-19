@@ -1,5 +1,7 @@
 'use strict'
 
+const chalk = require('chalk')
+
 function parsePayload (payload) {
   if (payload instanceof Buffer) {
     payload = payload.toString('utf8')

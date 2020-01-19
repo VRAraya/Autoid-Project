@@ -15,8 +15,8 @@ let sandbox = null
 let server = null
 let dbStub = null
 let token = null
-let AgentStub = {}
-let MetricStub = {}
+const AgentStub = {}
+const MetricStub = {}
 
 test.beforeEach(async () => {
   sandbox = sinon.createSandbox()
@@ -30,7 +30,7 @@ test.beforeEach(async () => {
   AgentStub.findConnected = sandbox.stub()
   AgentStub.findConnected.returns(Promise.resolve(agentFixtures.connected))
 
-  token = await sign({admin: true, username: 'root'}, config.auth.secret)
+  token = await sign({ admin: true, username: 'root' }, config.auth.secret)
 
   const api = proxyquire('../api', {
     'autoid-db': dbStub
@@ -41,7 +41,7 @@ test.beforeEach(async () => {
   })
 })
 
-test. afterEach(() => {
+test.afterEach(() => {
   sandbox && sinon.resetHistory()
 })
 
@@ -53,8 +53,8 @@ test.serial.cb('/api/agents', t => {
     .expect('Content-Type', /json/)
     .end((err, res) => {
       t.falsy(err, 'should not return an error')
-      let body = JSON.stringify(res.body)
-      let expected = JSON.stringify(agentFixtures.connected)
+      const body = JSON.stringify(res.body)
+      const expected = JSON.stringify(agentFixtures.connected)
       t.deepEqual(body, expected, 'response body should be the expected')
       t.end()
     })

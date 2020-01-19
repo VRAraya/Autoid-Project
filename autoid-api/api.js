@@ -26,7 +26,7 @@ api.use('*', async (req, res, next) => {
   next()
 })
 
-api.get('/agents', auth(config.auth) , async (req, res, next) => {
+api.get('/agents', auth(config.auth), async (req, res, next) => {
   debug('A request has come to /agents')
 
   const { user } = req
@@ -67,24 +67,29 @@ api.get('/agent/:uuid', async (req, res, next) => {
   res.send(agent)
 })
 
-api.get('/metrics/:uuid', auth(config.auth), guard.check(['metrics: read']), async (req, res, next) => {
-  const { uuid } = req.params
+api.get(
+  '/metrics/:uuid',
+  auth(config.auth),
+  guard.check(['metrics: read']),
+  async (req, res, next) => {
+    const { uuid } = req.params
 
-  debug(`request to /metrics/${uuid}`)
+    debug(`request to /metrics/${uuid}`)
 
-  let metrics = []
-  try {
-    metrics = await Metric.findByAgentUuid(uuid)
-  } catch (e) {
-    return next(e)
+    let metrics = []
+    try {
+      metrics = await Metric.findByAgentUuid(uuid)
+    } catch (e) {
+      return next(e)
+    }
+
+    if (!metrics || metrics.length === 0) {
+      return next(new Error(`Metrics not found for agent with uuid ${uuid}`))
+    }
+
+    res.send(metrics)
   }
-
-  if (!metrics || metrics.length === 0) {
-    return next(new Error(`Metrics not found for agent with uuid ${uuid}`))
-  }
-
-  res.send(metrics)
-})
+)
 
 api.get('/metrics/:uuid/:type', async (req, res, next) => {
   const { uuid, type } = req.params
@@ -99,7 +104,9 @@ api.get('/metrics/:uuid/:type', async (req, res, next) => {
   }
 
   if (!metrics || metrics.length === 0) {
-    return next(new Error(`Metrics (${type}) not found for agent with uuid ${uuid}`))
+    return next(
+      new Error(`Metrics (${type}) not found for agent with uuid ${uuid}`)
+    )
   }
 
   res.send(metrics)
