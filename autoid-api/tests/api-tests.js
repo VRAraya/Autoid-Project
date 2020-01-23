@@ -1,5 +1,6 @@
 'use strict'
 
+const debug = require('debug')('autoid:api:tests')
 const test = require('ava')
 const util = require('util')
 const request = require('supertest')
@@ -7,7 +8,7 @@ const sinon = require('sinon')
 const proxyquire = require('proxyquire')
 
 const agentFixtures = require('./fixtures/agent')
-const config = require('../config')
+const serverConfig = require('autoid-config')
 const auth = require('../auth')
 const sign = util.promisify(auth.sign)
 
@@ -18,14 +19,20 @@ let token = null
 const AgentStub = {}
 const MetricStub = {}
 
+const config = serverConfig({
+  logging: s => debug(s)
+})
+
 test.beforeEach(async () => {
   sandbox = sinon.createSandbox()
 
   dbStub = sandbox.stub()
-  dbStub.returns(Promise.resolve({
-    Agent: AgentStub,
-    Metric: MetricStub
-  }))
+  dbStub.returns(
+    Promise.resolve({
+      Agent: AgentStub,
+      Metric: MetricStub
+    })
+  )
 
   AgentStub.findConnected = sandbox.stub()
   AgentStub.findConnected.returns(Promise.resolve(agentFixtures.connected))

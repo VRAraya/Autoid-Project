@@ -7,7 +7,7 @@ const { handleFatalError } = require('autoid-utils')
 async function run () {
   const config = exampleConfig()
 
-  const { Agent, Metric } = await db(config).catch(handleFatalError)
+  const { Agent, Metric } = await db(config.db).catch(handleFatalError)
 
   const agent = await Agent.createOrUpdate({
     uuid: 'yyyz',
@@ -25,7 +25,9 @@ async function run () {
   console.log('--agents--')
   console.log(agents)
 
-  const metrics = await Metric.findByAgentUuid(agent.uuid).catch(handleFatalError)
+  const metrics = await Metric.findByAgentUuid(agent.uuid).catch(
+    handleFatalError
+  )
   console.log('--metrics--')
   console.log(metrics)
 
@@ -37,7 +39,10 @@ async function run () {
   console.log('--metric--')
   console.log(metric)
 
-  const metricsByType = await Metric.findByTypeAgentUuid('memory', agent.uuid).catch(handleFatalError)
+  const metricsByType = await Metric.findByTypeAgentUuid(
+    'memory',
+    agent.uuid
+  ).catch(handleFatalError)
   console.log('--metrics--')
   console.log(metricsByType)
 }

@@ -16,7 +16,7 @@ async function setup () {
     const answer = await prompt({
       type: 'confirm',
       name: 'setup',
-      massage: 'This will destroy your DataBase, Are you Sure?'
+      message: 'This will destroy your DataBase, Are you Sure?'
     })
     if (!answer.setup || ops) {
       return console.log('Nothing happened :)')
@@ -28,7 +28,7 @@ async function setup () {
     logging: s => debug(s)
   })
 
-  await db(config).catch(handleFatalError)
+  await db(config.db).catch(handleFatalError)
   console.log('Success!')
   process.exit(0)
 }

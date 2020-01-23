@@ -5,10 +5,13 @@ const express = require('express')
 const auth = require('express-jwt')
 const guard = require('express-jwt-permissions')()
 const db = require('autoid-db')
-
-const config = require('./config')
+const serverConfig = require('autoid-config')
 
 const api = express.Router()
+
+const config = serverConfig({
+  logging: s => debug(s)
+})
 
 let services, Agent, Metric
 

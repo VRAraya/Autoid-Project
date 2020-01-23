@@ -33,7 +33,7 @@ server.on('clientConnected', client => {
   clients.set(client.id, null)
 })
 
-server.on('clientDisconnected', async (client) => {
+server.on('clientDisconnected', async client => {
   debug(`Client Disconnected: ${client.id}`)
   const agent = clients.get(client.id)
 
@@ -58,7 +58,9 @@ server.on('clientDisconnected', async (client) => {
         }
       })
     })
-    debug(`Client (${client.id}) assciated to Agent (${agent.uuid}) marked as disconnected`)
+    debug(
+      `Client (${client.id}) assciated to Agent (${agent.uuid}) marked as disconnected`
+    )
   }
 })
 
@@ -105,7 +107,7 @@ server.on('published', async (packet, client) => {
         }
 
         // Store Metrics
-        const saveMetricsPromises = payload.metrics.map(async (metric) => {
+        const saveMetricsPromises = payload.metrics.map(async metric => {
           let createdMetric
 
           try {
@@ -125,7 +127,7 @@ server.on('published', async (packet, client) => {
 })
 
 server.on('ready', async () => {
-  const services = await db(config).catch(handleFatalError)
+  const services = await db(config.db).catch(handleFatalError)
 
   Agent = services.Agent
   Metric = services.Metric

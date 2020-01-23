@@ -20,5 +20,7 @@
   "devDependencies": {
     "standard": "^13.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "debug": "^4.1.1"
+  }
 }
