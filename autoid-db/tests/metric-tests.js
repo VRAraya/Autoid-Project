@@ -2,8 +2,7 @@ const test = require('ava')
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
 
-const agentFixtures = require('./fixtures/agent')
-const metricFixtures = require('./fixtures/metric')
+const { agentFixtures, metricFixtures } = require('autoid-utils')
 
 const config = {
   logging () {}
@@ -135,7 +134,10 @@ test.serial('Metric#findByAgentUuid', async t => {
 
   t.true(MetricStub.findAll.called, 'findAll should be called on model')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called once')
-  t.true(MetricStub.findAll.calledWith(uuidArgs), 'findAll should be called without args')
+  t.true(
+    MetricStub.findAll.calledWith(uuidArgs),
+    'findAll should be called without args'
+  )
   t.deepEqual(metric, metricFixtures.byAgentUuid(uuid), 'Should be the same')
 })
 
@@ -144,9 +146,16 @@ test.serial('Metric#findByTypeAgentUuid', async t => {
 
   t.true(MetricStub.findAll.called, 'findAll should be called on model')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called once')
-  t.true(MetricStub.findAll.calledWith(typeArgs), 'findAll should be called without args')
+  t.true(
+    MetricStub.findAll.calledWith(typeArgs),
+    'findAll should be called without args'
+  )
 
-  t.deepEqual(metric, metricFixtures.byTypeAgentUuid(type, uuid), 'Should be the same')
+  t.deepEqual(
+    metric,
+    metricFixtures.byTypeAgentUuid(type, uuid),
+    'Should be the same'
+  )
 })
 
 test.serial('Metric#Create', async t => {
@@ -154,11 +163,17 @@ test.serial('Metric#Create', async t => {
 
   t.true(AgentStub.findOne.called, 'Agent findOne should be called on model')
   t.true(AgentStub.findOne.calledOnce, 'Agent findOne should be called once')
-  t.true(AgentStub.findOne.calledWith(agentUuidArgs), 'findOne should be called with uuid args')
+  t.true(
+    AgentStub.findOne.calledWith(agentUuidArgs),
+    'findOne should be called with uuid args'
+  )
 
   t.true(MetricStub.create.called, 'create should be called on model')
   t.true(MetricStub.create.calledOnce, 'create should be called once')
-  t.true(MetricStub.create.calledWith(newMetric), 'create should be called once')
+  t.true(
+    MetricStub.create.calledWith(newMetric),
+    'create should be called once'
+  )
 
   t.deepEqual(metric, newMetric, 'agent should be the same')
 })

@@ -1,6 +1,8 @@
 'use strict'
 
 const chalk = require('chalk')
+const agentFixtures = require('./fixtures/agent')
+const metricFixtures = require('./fixtures/metric')
 
 function parsePayload (payload) {
   if (payload instanceof Buffer) {
@@ -30,5 +32,7 @@ function handleError (err) {
 module.exports = {
   parsePayload,
   handleFatalError,
-  handleError
+  handleError,
+  agentFixtures,
+  metricFixtures
 }
