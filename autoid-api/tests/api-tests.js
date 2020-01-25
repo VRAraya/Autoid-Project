@@ -65,7 +65,7 @@ test.beforeEach(async () => {
     {
       admin: true,
       username: 'root',
-      permissions: ['metrics: read']
+      permissions: ['agents: read', 'metrics: read']
     },
     config.auth.secret
   )
@@ -115,6 +115,7 @@ test.serial.cb('/api/agents - not authorized', t => {
 test.serial.cb('/api/agent/:uuid', t => {
   request(server)
     .get(`/api/agent/${uuid}`)
+    .set('Authorization', `Bearer ${token}`)
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
@@ -129,6 +130,7 @@ test.serial.cb('/api/agent/:uuid', t => {
 test.serial.cb('/api/agent/:uuid - not found', t => {
   request(server)
     .get(`/api/agent/${wrongUuid}`)
+    .set('Authorization', `Bearer ${token}`)
     .expect(404)
     .expect('Content-Type', /json/)
     .end((err, res) => {
@@ -175,6 +177,7 @@ test.serial.cb('/api/metrics/:uuid - not found', t => {
 test.serial.cb('/api/metrics/:uuid/:type', t => {
   request(server)
     .get(`/api/metrics/${uuid}/${type}`)
+    .set('Authorization', `Bearer ${token}`)
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
@@ -191,6 +194,7 @@ test.serial.cb('/api/metrics/:uuid/:type', t => {
 test.serial.cb('/api/metrics/:uuid/:type - not found', t => {
   request(server)
     .get(`/api/metrics/${wrongUuid}/${type}`)
+    .set('Authorization', `Bearer ${token}`)
     .expect(404)
     .expect('Content-Type', /json/)
     .end((err, res) => {
