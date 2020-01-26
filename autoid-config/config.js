@@ -12,5 +12,11 @@ module.exports = ({ setup = false, logging = () => {} } = {}) => ({
   },
   auth: {
     secret: process.env.SECRET || 'Ubuntu123++'
+  },
+  web: {
+    endpoint: process.env.API_ENDPOINT || 'http://localhost:3000/',
+    apiToken:
+      process.env.API_TOKEN ||
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJhZG1pbiI6dHJ1ZSwicGVybWlzc2lvbnMiOlsiYWdlbnRzOiByZWFkIiwibWV0cmljczogcmVhZCJdLCJpYXQiOjE1ODAwNDk3MzZ9.ku6sCgSudcEQehj422mNdp-4cRtESkiZiGDmoclOOb0'
   }
 })
