@@ -6,9 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Automatic Indoor Garden</title>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Roboto:400,600,700"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background: white;
+        height: 64px;
+        display: flex;
+        align-items: center;
+      }
+      .header-container {
+        max-width: 850px;
+        margin: 0 auto;
+        flex: 1;
+        padding: 0 15px;
+      }
+      @media screen and (min-width: 850px) {
+        .header-container {
+          padding: 0;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Automatic Indoor Garden</h1>
+    <header class="header">
+      <div class="header-container">
+        <img
+          src="/images/platziverse.png"
+          width="185"
+          height="38"
+          alt="AutoIndoorGarden"
+        />
+      </div>
+    </header>
+    <div id="app"></div>
+    <script type="text/javascript" src="/bundle.js"></script>
     <script type="text/javascript">
       var socket = io()
 
@@ -23,10 +57,6 @@
       socket.on('agent/disconnected', function(payload) {
         console.log('agent/disconnected', payload)
       })
-
-      // setTimeout(function() {
-      //   socket.emit('agent/message', 'hello server')
-      // }, 5000)
     </script>
   </body>
 </html>
