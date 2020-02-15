@@ -10,20 +10,6 @@
     <p v-if="error">{{ error }}</p>
   </div>
 </template>
-<style>
-.metric {
-  border: 1px solid white;
-  margin: 0 auto;
-}
-.metric-type {
-  font-size: 28px;
-  font-weight: normal;
-  font-family: 'Roboto', sans-serif;
-}
-canvas {
-  margin: 0 auto;
-}
-</style>
 
 <script>
 const request = require('request-promise-native')
@@ -149,3 +135,18 @@ module.exports = {
   }
 }
 </script>
+
+<style>
+.metric {
+  border: 1px solid white;
+  margin: 0 auto;
+}
+.metric-type {
+  font-size: 28px;
+  font-weight: normal;
+  font-family: 'Roboto', sans-serif;
+}
+canvas {
+  margin: 0 auto;
+}
+</style>

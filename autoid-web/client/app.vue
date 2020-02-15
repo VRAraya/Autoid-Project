@@ -1,18 +1,10 @@
 <template>
   <div>
-    <metric uuid="5a06008a-5d2a-4268-89a0-53bb18f8f42a" type="callbackMetric" :socket="socket"></metric>
+    <agent uuid="1258101d-19cc-4de6-a197-63eebaf23002" :socket="socket"></agent>
     <agent v-for="agent in agents" :uuid="agent.uuid" :key="agent.uuid"></agent>
     <p v-if="error">{{ error }}</p>
   </div>
 </template>
-
-<style>
-body {
-  font-family: Arial;
-  background: #f8f8f8;
-  margin: 0;
-}
-</style>
 
 <script>
 const io = require('socket.io-client')
@@ -34,3 +26,11 @@ module.exports = {
   }
 }
 </script>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f8f8f8;
+  margin: 0;
+}
+</style>

@@ -12,6 +12,7 @@
         <h3 class="metrics-title">Metrics</h3>
         <metric
           :uuid="uuid"
+          :socket="socket"
           v-for="metric in metrics"
           v-bind:type="metric.type"
           v-bind:key="metric.type"
@@ -21,6 +22,103 @@
     <p v-if="error">{{error}}</p>
   </div>
 </template>
+
+<script>
+const request = require('request-promise-native')
+const serverConfig = require('autoid-config')
+
+const config = serverConfig({
+  logging: s => debug(s)
+})
+
+module.exports = {
+  props: ['uuid', 'socket'],
+
+  data() {
+    return {
+      name: null,
+      hostname: null,
+      connected: false,
+      pid: null,
+      showMetrics: false,
+      error: null,
+      metrics: []
+    }
+  },
+
+  mounted() {
+    this.initialize()
+  },
+
+  methods: {
+    async initialize() {
+      const { uuid } = this
+
+      const options = {
+        // prettier-ignore
+        'method': 'GET',
+        // prettier-ignore
+        'url': `http://localhost:3000/api/agent/${uuid}`,
+        // prettier-ignore
+        'headers': {
+          // prettier-ignore
+          'Authorization': `Bearer ${config.web.apiToken}`
+        },
+        // prettier-ignore
+        'json': 'true'
+      }
+
+      let agent
+
+      try {
+        agent = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      this.name = agent.name
+      this.hostname = agent.hostname
+      this.connected = agent.connected
+      this.pid = agent.pid
+
+      this.loadMetrics()
+    },
+
+    async loadMetrics() {
+      const { uuid } = this
+
+      const options = {
+        // prettier-ignore
+        'method': 'GET',
+        // prettier-ignore
+        'url': `http://localhost:3000/api/metrics/${uuid}`,
+        // prettier-ignore
+        'headers': {
+          // prettier-ignore
+          'Authorization': `Bearer ${config.web.apiToken}`
+        },
+        // prettier-ignore
+        'json': 'true'
+      }
+
+      let metrics
+      try {
+        metrics = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      this.metrics = metrics
+    },
+
+    toggleMetrics() {
+      this.showMetrics = this.showMetrics ? false : true
+    }
+  }
+}
+</script>
 
 <style>
 .metrics-title {
@@ -75,32 +173,3 @@
   }
 }
 </style>
-
-<script>
-module.exports = {
-  props: ['uuid'],
-
-  data() {
-    return {
-      name: null,
-      hostname: null,
-      connected: false,
-      showMetrics: false,
-      error: null,
-      metrics: []
-    }
-  },
-
-  mounted() {
-    this.initialize()
-  },
-
-  methods: {
-    initialize() {},
-
-    toggleMetrics() {
-      this.showMetrics = this.showMetrics ? false : true
-    }
-  }
-}
-</script>
