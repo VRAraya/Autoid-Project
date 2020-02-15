@@ -111,6 +111,18 @@ module.exports = {
       }
 
       this.metrics = metrics
+
+      this.startRealTime()
+    },
+
+    startRealTime() {
+      const { uuid, socket } = this
+
+      socket.on('agent/disconnected', payload => {
+        if (payload.agent.uuid === uuid) {
+          this.connected = false
+        }
+      })
     },
 
     toggleMetrics() {

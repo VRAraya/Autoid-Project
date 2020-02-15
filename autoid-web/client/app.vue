@@ -1,14 +1,19 @@
 <template>
   <div>
-    <agent uuid="1258101d-19cc-4de6-a197-63eebaf23002" :socket="socket"></agent>
-    <agent v-for="agent in agents" :uuid="agent.uuid" :key="agent.uuid"></agent>
+    <agent v-for="agent in agents" :uuid="agent.uuid" :key="agent.uuid" :socket="socket"></agent>
     <p v-if="error">{{ error }}</p>
   </div>
 </template>
 
 <script>
+const request = require('request-promise-native')
 const io = require('socket.io-client')
 const socket = io()
+const serverConfig = require('autoid-config')
+
+const config = serverConfig({
+  logging: s => debug(s)
+})
 
 module.exports = {
   data() {
@@ -22,7 +27,41 @@ module.exports = {
     this.initialize()
   },
   methods: {
-    initialize() {}
+    async initialize() {
+      const options = {
+        // prettier-ignore
+        'method': 'GET',
+        // prettier-ignore
+        'url': `http://localhost:3000/api/agents`,
+        // prettier-ignore
+        'headers': {
+          // prettier-ignore
+          'Authorization': `Bearer ${config.web.apiToken}`
+        },
+        // prettier-ignore
+        'json': 'true'
+      }
+
+      let result
+      try {
+        result = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      this.agents = result
+
+      socket.on('agent/connected', payload => {
+        const { uuid } = payload.agent
+
+        const existing = this.agents.find(a => a.uuid === uuid)
+
+        if (!existing) {
+          this.agents.push(payload.agent)
+        }
+      })
+    }
   }
 }
 </script>
