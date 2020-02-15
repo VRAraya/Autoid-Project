@@ -34,7 +34,7 @@ api.get(
   auth(config.auth),
   guard.check(['agents: read']),
   async (req, res, next) => {
-    debug('A request has come to /agents')
+    debug('A  has come to /agents')
 
     const { user } = req
 
@@ -63,7 +63,7 @@ api.get(
   async (req, res, next) => {
     const { uuid } = req.params
 
-    debug(`request to /agent/${uuid}`)
+    debug(` to /agent/${uuid}`)
 
     let agent
     try {
@@ -87,7 +87,7 @@ api.get(
   async (req, res, next) => {
     const { uuid } = req.params
 
-    debug(`request to /metrics/${uuid}`)
+    debug(` to /metrics/${uuid}`)
 
     let metrics = []
     try {
@@ -109,9 +109,15 @@ api.get(
   auth(config.auth),
   guard.check(['metrics: read']),
   async (req, res, next) => {
+    const { user } = req
+
+    if (!user || !user.username) {
+      return next(new Error('Not authorized'))
+    }
+
     const { uuid, type } = req.params
 
-    debug(`request to /metrics/${uuid}/${type}`)
+    debug(` to /metrics/${uuid}/${type}`)
 
     let metrics = []
     try {

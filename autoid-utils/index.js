@@ -3,6 +3,7 @@
 const chalk = require('chalk')
 const agentFixtures = require('./fixtures/agent')
 const metricFixtures = require('./fixtures/metric')
+const auth = require('./auth')
 
 function pipe(source, target) {
   if (!source.emit || !target.emit) {
@@ -49,5 +50,6 @@ module.exports = {
   handleFatalError,
   handleError,
   agentFixtures,
-  metricFixtures
+  metricFixtures,
+  auth
 }

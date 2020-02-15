@@ -7,9 +7,8 @@ const request = require('supertest')
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
 
-const { agentFixtures, metricFixtures } = require('autoid-utils')
+const { agentFixtures, metricFixtures, auth } = require('autoid-utils')
 const serverConfig = require('autoid-config')
-const auth = require('../auth')
 const sign = util.promisify(auth.sign)
 
 let sandbox = null

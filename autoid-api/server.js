@@ -4,6 +4,7 @@ const http = require('http')
 const chalk = require('chalk')
 const express = require('express')
 const debug = require('debug')('autoid:api')
+const cors = require('cors')
 
 const { handleFatalError } = require('autoid-utils')
 
@@ -14,6 +15,7 @@ const app = express()
 const server = http.createServer(app)
 
 // Middlewares
+app.use(cors())
 app.use('/api', api)
 
 // Express Error Handler Middleware

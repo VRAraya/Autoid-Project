@@ -6,15 +6,15 @@ const agent = new AutoIdAgent({
   interval: 2000
 })
 
-agent.addMetric('rss', function getRss () {
+agent.addMetric('rss', function getRss() {
   return process.memoryUsage().rss
 })
 
-agent.addMetric('promiseMetric', function getRandomPromise () {
+agent.addMetric('promiseMetric', function getRandomPromise() {
   return Promise.resolve(Math.random())
 })
 
-agent.addMetric('callbackMetric', function getRandomCallback (callback) {
+agent.addMetric('callbackMetric', function getRandomCallback(callback) {
   setTimeout(() => {
     callback(null, Math.random())
   }, 1000)
@@ -32,8 +32,6 @@ agent.on('agent/connected', handler)
 agent.on('agent/disconnected', handler)
 agent.on('agent/message', handler)
 
-function handler (payload) {
+function handler(payload) {
   console.log(payload)
 }
-
-setTimeout(() => agent.disconnect(), 10000)

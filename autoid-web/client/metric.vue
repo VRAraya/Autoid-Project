@@ -7,7 +7,7 @@
       :width="400"
       :height="200"
     ></line-chart>
-    <p v-if="error">{{error}}</p>
+    <p v-if="error">{{ error }}</p>
   </div>
 </template>
 <style>
@@ -24,15 +24,24 @@ canvas {
   margin: 0 auto;
 }
 </style>
+
 <script>
+const request = require('request-promise-native')
+const moment = require('moment')
+const randomColor = require('random-material-color')
 const LineChart = require('./line-chart')
+const serverConfig = require('autoid-config')
+
+const config = serverConfig({
+  logging: s => debug(s)
+})
 
 module.exports = {
   name: 'metric',
   components: {
     LineChart
   },
-  props: ['uuid', 'type'],
+  props: ['uuid', 'type', 'socket'],
 
   data() {
     return {
@@ -47,7 +56,92 @@ module.exports = {
   },
 
   methods: {
-    initialize() {},
+    async initialize() {
+      const { uuid, type } = this
+
+      this.color = randomColor.getColor()
+
+      const options = {
+        // prettier-ignore
+        'method': 'GET',
+        // prettier-ignore
+        'url': `http://localhost:3000/api/metrics/${uuid}/${type}`,
+        // prettier-ignore
+        'headers': {
+          // prettier-ignore
+          'Authorization': `Bearer ${config.web.apiToken}`
+        },
+        // prettier-ignore
+        'json': 'true'
+      }
+
+      let result
+      try {
+        result = await request(options)
+      } catch (e) {
+        this.error = e.error.error
+        return
+      }
+
+      const labels = []
+      const data = []
+
+      if (Array.isArray(result)) {
+        result.forEach(m => {
+          labels.push(moment(m.createdAt).format('HH:mm:ss'))
+          data.push(m.value)
+        })
+      }
+      this.datacollection = {
+        labels,
+        datasets: [
+          {
+            backgroundColor: this.color,
+            label: type,
+            data
+          }
+        ]
+      }
+
+      this.startRealTime()
+    },
+
+    startRealTime() {
+      const { type, uuid, socket } = this
+
+      socket.on('agent/message', payload => {
+        if (payload.agent.uuid === uuid) {
+          const metric = payload.metrics.find(m => m.type === type)
+
+          // Copy current values
+          const labels = this.datacollection.labels
+          const data = this.datacollection.datasets[0].data
+
+          // Remove first element if length > 20
+          const length = labels.length || data.length
+
+          if (length >= 20) {
+            labels.shift()
+            data.shift()
+          }
+
+          // Add new elements
+          labels.push(moment(metric.createdAt).format('HH:mm:ss'))
+          data.push(metric.value)
+
+          this.datacollection = {
+            labels,
+            datasets: [
+              {
+                backgroundColor: this.color,
+                label: type,
+                data
+              }
+            ]
+          }
+        }
+      })
+    },
 
     handleError(err) {
       this.error = err.message
