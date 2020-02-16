@@ -30,6 +30,7 @@
     "ws": "^7.1.2"
   },
   "devDependencies": {
+    "longjohn": "^0.2.12",
     "nodemon": "^1.19.1",
     "standard": "^13.1.0"
   }

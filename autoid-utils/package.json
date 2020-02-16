@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/VRAraya/AutoId-Project#readme",
   "devDependencies": {
+    "longjohn": "^0.2.12",
     "standard": "^14.0.2"
   },
   "dependencies": {

@@ -1,5 +1,6 @@
 'use strict'
 
+require('longjohn')
 const http = require('http')
 const chalk = require('chalk')
 const express = require('express')

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <agent v-for="agent in agents" :uuid="agent.uuid" :key="agent.uuid" :socket="socket"></agent>
+    <agent
+      v-for="agent in agents"
+      :uuid="agent.uuid"
+      :key="agent.uuid"
+      :socket="socket"
+    ></agent>
     <p v-if="error">{{ error }}</p>
   </div>
 </template>
@@ -32,7 +37,7 @@ module.exports = {
         // prettier-ignore
         'method': 'GET',
         // prettier-ignore
-        'url': `http://localhost:3000/api/agents`,
+        'url': `http://localhost:8080/agents`,
         // prettier-ignore
         'headers': {
           // prettier-ignore

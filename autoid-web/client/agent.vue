@@ -1,11 +1,11 @@
 <template>
   <div class="agent">
     <div>
-      <h2 class="agent-title">{{name}} ({{pid}})</h2>
-      <p class="agent-host">{{hostname}}</p>
+      <h2 class="agent-title">{{ name }} ({{ pid }})</h2>
+      <p class="agent-host">{{ hostname }}</p>
       <p class="agent-status">
         Connected:
-        <span>{{connected}}</span>
+        <span>{{ connected }}</span>
       </p>
       <button v-on:click="toggleMetrics" class="button">Toggle Metrics</button>
       <div v-show="showMetrics">
@@ -19,7 +19,7 @@
         ></metric>
       </div>
     </div>
-    <p v-if="error">{{error}}</p>
+    <p v-if="error">{{ error }}</p>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ module.exports = {
         // prettier-ignore
         'method': 'GET',
         // prettier-ignore
-        'url': `http://localhost:3000/api/agent/${uuid}`,
+        'url': `http://localhost:8080/agent/${uuid}`,
         // prettier-ignore
         'headers': {
           // prettier-ignore
@@ -92,7 +92,7 @@ module.exports = {
         // prettier-ignore
         'method': 'GET',
         // prettier-ignore
-        'url': `http://localhost:3000/api/metrics/${uuid}`,
+        'url': `http://localhost:8080/metrics/${uuid}`,
         // prettier-ignore
         'headers': {
           // prettier-ignore

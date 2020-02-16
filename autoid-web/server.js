@@ -1,5 +1,6 @@
 'use strict'
 
+require('longjohn')
 const debug = require('debug')('autoid:web')
 const http = require('http')
 const path = require('path')

@@ -4,6 +4,7 @@
 
 /* eslint new-cap: "off" */
 
+require('longjohn')
 const blessed = require('blessed')
 const contrib = require('blessed-contrib')
 const moment = require('moment')
@@ -14,6 +15,11 @@ const screen = blessed.screen()
 
 const agents = new Map()
 const agentMetrics = new Map()
+let extended = []
+const selected = {
+  uuid: null,
+  type: null
+}
 
 const grid = new contrib.grid({
   rows: 1,
@@ -86,14 +92,33 @@ agent.on('agent/message', payload => {
   renderData()
 })
 
-function renderData() {
-  const treeData = {}
+tree.on('select', node => {
+  const { uuid } = node
 
-  for (let [uuid, val] of agents) {
-    const title = `${val.name} - (${val.pid})`
+  if (node.agent) {
+    node.extended
+      ? extended.push(uuid)
+      : (extended = extended.filter(e => e !== uuid))
+    selected.uuid = null
+    selected.type = null
+    return
+  }
+
+  selected.uuid = uuid
+  selected.type = node.type
+
+  renderMetric()
+})
+
+function renderData () {
+  const treeData = {}
+  let idx = 0
+  for (const [uuid, val] of agents) {
+    const title = ` ${val.name} - (${val.pid})`
     treeData[title] = {
       uuid,
       agent: true,
+      extended: extended.includes(uuid),
       children: {}
     }
 
@@ -105,14 +130,37 @@ function renderData() {
         metric: true
       }
 
-      const metricName = ` ${type}`
+      const metricName = ` ${type} ${' '.repeat(1000)} ${idx++}`
       treeData[title].children[metricName] = metric
     })
   }
+
   tree.setData({
     extended: true,
     children: treeData
   })
+
+  renderMetric()
+}
+
+function renderMetric () {
+  if (!selected.uuid && !selected.type) {
+    line.setData([{ x: [], y: [], title: '' }])
+    screen.render()
+    return
+  }
+
+  const metrics = agentMetrics.get(selected.uuid)
+  const values = metrics[selected.type]
+  const series = [
+    {
+      title: selected.type,
+      x: values.map(v => v.timestamp).slice(-10),
+      y: values.map(v => v.value).slice(-10)
+    }
+  ]
+
+  line.setData(series)
   screen.render()
 }
 

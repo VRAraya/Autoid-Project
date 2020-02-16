@@ -1,5 +1,6 @@
 'use strict'
 
+require('longjohn')
 const debug = require('debug')('autoid:mqtt')
 const mosca = require('mosca')
 const redis = require('redis')
