@@ -37,7 +37,7 @@ module.exports = {
         // prettier-ignore
         'method': 'GET',
         // prettier-ignore
-        'url': `http://localhost:8080/agents`,
+        'url': `${config.web.serverHost}/agents`,
         // prettier-ignore
         'headers': {
           // prettier-ignore

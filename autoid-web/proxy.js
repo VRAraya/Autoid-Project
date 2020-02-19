@@ -13,7 +13,7 @@ const config = serverConfig({
 api.get('/agents', async (req, res, next) => {
   const options = {
     method: 'GET',
-    uri: `${config.web.endpoint}api/agents`,
+    uri: `${config.web.endpoint}/api/agents`,
     headers: {
       // prettier-ignore
       'Authorization': `Bearer ${config.web.apiToken}`
@@ -35,7 +35,7 @@ api.get('/agent/:uuid', async (req, res, next) => {
   const { uuid } = req.params
   const options = {
     method: 'GET',
-    uri: `${config.web.endpoint}api/agent/${uuid}`,
+    uri: `${config.web.endpoint}/api/agent/${uuid}`,
     headers: {
       // prettier-ignore
       'Authorization': `Bearer ${config.web.apiToken}`
@@ -57,7 +57,7 @@ api.get('/metrics/:uuid', async (req, res, next) => {
   const { uuid } = req.params
   const options = {
     method: 'GET',
-    uri: `${config.web.endpoint}api/metrics/${uuid}`,
+    uri: `${config.web.endpoint}/api/metrics/${uuid}`,
     headers: {
       // prettier-ignore
       'Authorization': `Bearer ${config.web.apiToken}`
@@ -79,7 +79,7 @@ api.get('/metrics/:uuid/:type', async (req, res, next) => {
   const { uuid, type } = req.params
   const options = {
     method: 'GET',
-    uri: `${config.web.endpoint}api/metrics/${uuid}/${type}`,
+    uri: `${config.web.endpoint}/api/metrics/${uuid}/${type}`,
     headers: {
       // prettier-ignore
       'Authorization': `Bearer ${config.web.apiToken}`

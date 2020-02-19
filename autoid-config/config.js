@@ -14,7 +14,8 @@ module.exports = ({ setup = false, logging = () => {} } = {}) => ({
     secret: process.env.SECRET || 'Ubuntu123++'
   },
   web: {
-    endpoint: process.env.API_ENDPOINT || 'http://localhost:3000/',
+    endpoint: process.env.API_ENDPOINT || 'http://localhost:3000',
+    serverHost: process.env.SERVERHOST || 'http://localhost:8080',
     apiToken:
       process.env.API_TOKEN ||
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJhZG1pbiI6dHJ1ZSwicGVybWlzc2lvbnMiOlsiYWdlbnRzOiByZWFkIiwibWV0cmljczogcmVhZCJdLCJpYXQiOjE1ODAwNDk3MzZ9.ku6sCgSudcEQehj422mNdp-4cRtESkiZiGDmoclOOb0'

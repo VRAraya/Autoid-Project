@@ -51,7 +51,7 @@ module.exports = {
         // prettier-ignore
         'method': 'GET',
         // prettier-ignore
-        'url': `http://localhost:8080/metrics/${uuid}/${type}`,
+        'url': `${config.web.serverHost}/metrics/${uuid}/${type}`,
         // prettier-ignore
         'headers': {
           // prettier-ignore

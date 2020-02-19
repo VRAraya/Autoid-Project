@@ -4,7 +4,6 @@
 
 /* eslint new-cap: "off" */
 
-require('longjohn')
 const blessed = require('blessed')
 const contrib = require('blessed-contrib')
 const moment = require('moment')
@@ -110,7 +109,7 @@ tree.on('select', node => {
   renderMetric()
 })
 
-function renderData () {
+function renderData() {
   const treeData = {}
   let idx = 0
   for (const [uuid, val] of agents) {
@@ -143,7 +142,7 @@ function renderData () {
   renderMetric()
 }
 
-function renderMetric () {
+function renderMetric() {
   if (!selected.uuid && !selected.type) {
     line.setData([{ x: [], y: [], title: '' }])
     screen.render()

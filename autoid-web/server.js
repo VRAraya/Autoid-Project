@@ -1,6 +1,8 @@
 'use strict'
 
-require('longjohn')
+if (process.env.NODE_ENV !== 'production') {
+  require('longjohn')
+}
 const debug = require('debug')('autoid:web')
 const http = require('http')
 const path = require('path')

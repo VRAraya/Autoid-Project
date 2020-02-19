@@ -1,6 +1,8 @@
 'use strict'
 
-require('longjohn')
+if (process.env.NODE_ENV !== 'production') {
+  require('longjohn')
+}
 const http = require('http')
 const chalk = require('chalk')
 const express = require('express')
