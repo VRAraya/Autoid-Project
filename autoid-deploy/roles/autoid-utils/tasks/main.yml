@@ -1,0 +1,10 @@
+---
+- include: deps.yml
+- name: Copy autoid-utils
+  copy: src=autoid-utils
+    dest=/usr/local/src
+    mode=u=rwx,g=rx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/autoid-utils
+    creates=/usr/local/src/autoid-utils/node_modules

@@ -1,0 +1,13 @@
+---
+- include: deps.yml
+- name: Copy autoid-db
+  copy: src=autoid-db
+    dest=/usr/local/src
+    mode=u=rwx,g=rx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/autoid-db
+    creates=/usr/local/src/autoid-db/node_modules
+- name: Setup Database
+  command: npm run setup -- -y
+    chdir=/usr/local/src/autoid-db

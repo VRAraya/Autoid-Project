@@ -1,0 +1,23 @@
+---
+- include: deps.yml
+- name: Copying autoid-web
+  copy: src=autoid-web
+    dest=/usr/local/src
+    mode=u=rwx,g=rwx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/autoid-web
+    creates=/usr/local/src/autoid-web/node_modules
+- name: Install systemd script
+  copy: src=autoid-web.service
+    dest=/lib/systemd/system
+- name: Install nginx config
+  copy: src=autoid-web.conf
+    dest=/etc/nginx/sites-enabled
+- name: Start autoid-web
+  service: name=autoid-web
+    state=restarted
+    enabled=yes
+- name: Restart nginx
+  service: name=nginx
+    state=reloaded

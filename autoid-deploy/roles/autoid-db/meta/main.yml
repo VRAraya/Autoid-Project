@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: node }
+  - { role: autoid-config }
+  - { role: autoid-utils }

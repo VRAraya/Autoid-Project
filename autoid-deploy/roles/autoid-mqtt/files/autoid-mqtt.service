@@ -1,0 +1,15 @@
+[Unit]
+Description=AutoIndoorGarden MQTT
+After=network.target
+
+[Service]
+Environment=NODE_ENV=production
+Type=Simple
+User=root
+WorkingDirectory=/usr/local/src/autoid-mqtt
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

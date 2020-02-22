@@ -1,0 +1,17 @@
+---
+- include: deps.yml
+- name: Copying autoid-mqtt
+  copy: src=autoid-mqtt
+    dest=/usr/local/src
+    mode=u=rwx,g=rwx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/autoid-mqtt
+    creates=/usr/local/src/autoid-mqtt/node_modules
+- name: Install systemd script
+  copy: src=autoid-mqtt.service
+    dest=/lib/systemd/system
+- name: Start autoid-mqtt
+  service: name=autoid-mqtt
+    state=restarted
+    enabled=yes

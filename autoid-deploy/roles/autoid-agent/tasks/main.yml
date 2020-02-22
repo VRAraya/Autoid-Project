@@ -1,0 +1,10 @@
+---
+- include: deps.yml
+- name: Copy autoid-agent
+  copy: src=autoid-agent
+    dest=/usr/local/src
+    mode=u=rwx,g=rx,o=rx
+- name: Running npm install
+  command: npm install
+    chdir=/usr/local/src/autoid-agent
+    creates=/usr/local/src/autoid-agent/node_modules

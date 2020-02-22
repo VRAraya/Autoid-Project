@@ -1,5 +1,5 @@
 ---
-- hosts: backend-*
+- hosts: frontend-*
   gather_facts: False
   become: true
   pre_tasks:
@@ -7,6 +7,4 @@
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
     - setup:
   roles:
-    - database
-    - autoid-mqtt
-    - autoid-api
+    - autoid-web
