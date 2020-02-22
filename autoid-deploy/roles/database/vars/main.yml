@@ -1,0 +1,10 @@
+mysql_root_password: super-secure-password
+mysql_databases:
+  - name: AutoIndoorGarden
+    encoding: latin1
+    collation: latin1_general_ci
+mysql_users:
+  - name: vissstors
+    host: '%'
+    password: similary-secure-password
+    priv: 'AutoIndoorGarden.*:ALL'
