@@ -746,3 +746,8 @@ ubuntu-xenial login: [29103.661014] e1000 0000:00:03.0 enp0s3: Detected Tx Unit 
 [29105.734410]   jiffies              <1006de34b>
 [29105.734410]   next_to_watch.status <0>
 [29107.113666] e1000 0000:00:03.0 enp0s3: Reset adapter
+[70910.557084] NMI watchdog: BUG: soft lockup - CPU#1 stuck for 120s! [swapper/1:0]
+[70910.564185] INFO: rcu_sched detected stalls on CPUs/tasks:
+[70910.564191] 	1-...: (11 GPs behind) idle=c53/2/0 softirq=2560777/2560777 fqs=42 
+[70910.564194] 	(detected by 0, t=33852 jiffies, g=1720291, c=1720290, q=78)
+[70910.564241] rcu_sched kthread starved for 31049 jiffies! g1720291 c1720290 f0x0 s3 ->state=0x0

@@ -5,7 +5,7 @@
   "description": "A Simple IoT platform for Automatic Indoor Garden - MQTT Server",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "redis-server & NODE_ENV=production node server.js",
     "start-dev": "redis-server & DEBUG=autoid:* nodemon server.js",
     "lint": "standard"
   },
