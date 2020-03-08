@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "autoid-utils": "file:../autoid-utils",
+    "autoid-config": "file:../autoid-config",
     "debug": "^4.1.1",
     "defaults": "^1.0.3",
     "mqtt": "^3.0.0",
