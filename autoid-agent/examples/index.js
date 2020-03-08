@@ -3,7 +3,10 @@ const AutoIdAgent = require('../')
 const agent = new AutoIdAgent({
   name: 'myapp',
   username: 'admin',
-  interval: 2000
+  interval: 2000,
+  mqtt: {
+    host: 'mqtt://api.garden.space.chickenkiller.com'
+  }
 })
 
 agent.addMetric('rss', function getRss() {

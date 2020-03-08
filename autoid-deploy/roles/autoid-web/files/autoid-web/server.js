@@ -9,18 +9,29 @@ const path = require('path')
 const express = require('express')
 const socketio = require('socket.io')
 const chalk = require('chalk')
+const cors = require('cors')
 
 const { pipe, handleFatalError } = require('autoid-utils')
 const AutoidAgent = require('autoid-agent')
+const serverConfig = require('autoid-config')
+const config = serverConfig({
+  logging: s => debug(s)
+})
+
 const proxy = require('./proxy')
 
 const port = process.env.PORT || 8080
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
-const agent = new AutoidAgent()
+const agent = new AutoidAgent({
+  mqtt: {
+    host: `${config.web.mqttHost}`
+  }
+})
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors())
 app.use('/', proxy)
 
 // Socket.io / WebSockets

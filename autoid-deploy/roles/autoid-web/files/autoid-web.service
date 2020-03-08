@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 Environment=NODE_ENV=production
-Environment=API_ENDPOINT=http://api.autoindoorgarden.space
-Environment=SERVER_HOST=http://autoindoorgarden.space
-Environment=MQTT_HOST=mqtt://api.autoindoorgarden.space
+Environment=API_ENDPOINT=http://api.garden.space.chickenkiller.com
+Environment=SERVER_HOST=http://garden.space.chickenkiller.com
+Environment=MQTT_HOST=mqtt://api.garden.space.chickenkiller.com
 Type=simple
 User=root
 WorkingDirectory=/usr/local/src/autoid-web

@@ -9,6 +9,7 @@ const path = require('path')
 const express = require('express')
 const socketio = require('socket.io')
 const chalk = require('chalk')
+const cors = require('cors')
 
 const { pipe, handleFatalError } = require('autoid-utils')
 const AutoidAgent = require('autoid-agent')
@@ -30,6 +31,7 @@ const agent = new AutoidAgent({
 })
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors())
 app.use('/', proxy)
 
 // Socket.io / WebSockets

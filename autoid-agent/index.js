@@ -7,6 +7,11 @@ const mqtt = require('mqtt')
 const defaults = require('defaults')
 const uuid = require('uuid')
 const EventEmitter = require('events')
+const serverConfig = require('autoid-config')
+
+const config = serverConfig({
+  logging: s => debug(s)
+})
 
 const { parsePayload } = require('autoid-utils')
 
@@ -15,7 +20,7 @@ const options = {
   username: 'root',
   interval: 5000,
   mqtt: {
-    host: 'mqtt://localhost'
+    host: `${config.web.mqttHost}`
   }
 }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node server.js",
     "prestart": "npm run build",
-    "build": "NODE_ENV=production browserify -g envify -t babelify -t vueify client/app.js | uglifyjs -c -m -o public/bundle.js",
+    "build": "NODE_ENV=production browserify -g envify -t babelify -t vueify client/app.js -o public/bundle.js",
     "start-dev": "DEBUG=autoid:* nodemon server.js",
     "prestart-dev": "npm run build-dev",
     "build-dev": "browserify -g envify -t babelify -t vueify client/app.js -o public/bundle.js",
@@ -55,6 +55,7 @@
     "babel-preset-vue": "^2.0.2",
     "chalk": "^3.0.0",
     "chart.js": "^2.9.3",
+    "cors": "^2.8.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "moment": "^2.24.0",
